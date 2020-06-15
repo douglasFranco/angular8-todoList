@@ -1,0 +1,23 @@
+<div class="container">
+  <mat-form-field class="todo-input-field">
+    <mat-label>What you want to do?</mat-label>
+    <input matInput maxlength="150" [(ngModel)]="description" (keyup.enter)="addTodo()"/>
+  </mat-form-field>
+  
+  <mat-list class="todolist">
+    <mat-list-item class="todolist-item" *ngFor="let todo of todos">
+      <div [ngClass]="{'done': todo.done}">{{ todo.description }}</div>
+      <div class="item-actions">
+        <button class="item-button" (click)="markAsDone(todo)" mat-mini-fab color="basic" aria-label="Mark as done button">
+          <mat-icon class="button-icon">done</mat-icon>
+        </button>
+        <button class="item-button" *ngIf="!todo.done" (click)="ableToEdit(todo)" mat-mini-fab color="primary" aria-label="Edit button">
+          <mat-icon class="button-icon">edit</mat-icon>
+        </button>
+        <button class="item-button" (click)="deleteTodo(todo.id)" mat-mini-fab color="warn" aria-label="Delete button">
+          <mat-icon class="button-icon">delete</mat-icon>
+        </button>
+      </div>      
+    </mat-list-item>    
+  </mat-list>
+</div>

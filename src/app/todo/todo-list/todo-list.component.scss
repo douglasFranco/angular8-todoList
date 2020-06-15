@@ -1,0 +1,31 @@
+.todo-input-field {
+  width: 100%;
+  margin: 10px 0px;
+}
+
+.todolist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+   .todolist-item {
+     padding-right: 120px;
+     margin-bottom: 1.5rem;
+    .item-button {
+       margin: 0px 2px;
+       width: 35px;
+       height: 35px;
+       .button-icon {
+         font-size: 18px;
+       }
+     }
+    .item-actions {
+      position: absolute;
+      right: -120px;
+      min-width: 120px;
+    }
+    .done {
+      text-decoration: line-through;
+    }
+  }  
+}

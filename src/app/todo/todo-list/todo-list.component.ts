@@ -1,47 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import Todo from './todo'
 
 @Component({
-  selector: 'app-todolist',
-  templateUrl: './todolist.component.html',
-  styleUrls: ['./todolist.component.scss']
-})
-export class TodolistComponent implements OnInit {
+  selector: 'app-todo-list',
+  templateUrl: './todo-list.component.html',
+  styleUrls: ['./todo-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 
-  constructor() { }
-  
-  @Input() description: string
-  todos: Todo[]
+})
+export class TodoListComponent implements OnInit {
+
+  @Input() todos: any
+  description: string  
   selectedTodo: Todo
 
   ngOnInit() {
+    this.todos = [...this.todos]
     this.description = ''
     this.selectedTodo = null
-    this.todos = [
-      {
-        id: 1,
-        description: 'First to-do item',
-        done: false
-      },
-      {
-        id: 2,
-        description: 'Second to-do item',
-        done: false
-      },
-      {
-        id: 3,
-        description: 'Third to-do item',
-        done: false
-      }
-    ]
   }
 
-  ableToEdit (todo) {
+  ableToEdit (todo) {    
     this.selectedTodo = todo
     this.description = todo.description
   }
 
-  addTodo(): void {
+  addTodo(todo): void {
+    if(!this.description) return
     if(this.selectedTodo !== null){
       this.confirmEdition()
       return
@@ -70,12 +55,13 @@ export class TodolistComponent implements OnInit {
   }
 
   deleteTodo(id: number): void {
-    console.log(id)
     this.todos = this.todos.filter(todo => todo.id !== id)
   }  
 
   markAsDone(todo): void {
+    console.log(todo)
     todo.done = !todo.done
+    
   }
 
 }

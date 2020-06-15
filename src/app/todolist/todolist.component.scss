@@ -1,0 +1,19 @@
+.todoList {
+  .item {
+    .done {
+      text-decoration: line-through;
+    }
+    .button {
+      &-done {
+        background-color: green;
+      }
+      &-edit {
+        background-color: blue;
+      }
+      &-delete{
+        background-color: red ;
+        cursor: pointer;
+      }      
+    }
+  }
+}

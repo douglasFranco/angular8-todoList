@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TodoListComponent } from './components/todo-list/todo-list.component'
 
-
-const routes: Routes = [
-  {path: '**', component: TodoListComponent}
+const routes: Routes = [  
+  { path: 'todolist', loadChildren: () => import('./todolist/todolist.module').then(m => m.TodolistModule) },
+  { path: '**',   redirectTo: '/todolist' },
 ];
 
 @NgModule({

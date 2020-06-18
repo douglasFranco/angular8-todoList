@@ -10,9 +10,9 @@ import Todo from './todo'
 })
 export class TodoListComponent implements OnInit {
 
-  @Input() todos: any
-  description: string  
-  selectedTodo: Todo
+  @Input() private todos: Todo[]
+  private description: string  
+  private selectedTodo: Todo
 
   ngOnInit() {
     this.todos = [...this.todos]
@@ -20,12 +20,12 @@ export class TodoListComponent implements OnInit {
     this.selectedTodo = null
   }
 
-  ableToEdit (todo) {    
+  private ableToEdit (todo) {    
     this.selectedTodo = todo
     this.description = todo.description
   }
 
-  addTodo(todo): void {
+  private addTodo(todo): void {
     if(!this.description) return
     if(this.selectedTodo !== null){
       this.confirmEdition()
@@ -39,7 +39,7 @@ export class TodoListComponent implements OnInit {
     this.description = ''
   }
 
-  calcTodoId(): number {
+  private calcTodoId(): number {
     let id: number = 1
     if (this.todos.length > 0){
       id = this.todos.slice(-1)[0]['id']
@@ -48,17 +48,17 @@ export class TodoListComponent implements OnInit {
     return id
   }
 
-  confirmEdition() {
+  private confirmEdition() {
     this.selectedTodo.description = this.description
     this.description = ''
     this.selectedTodo = null
   }
 
-  deleteTodo(id: number): void {
+  private deleteTodo(id: number): void {
     this.todos = this.todos.filter(todo => todo.id !== id)
   }  
 
-  markAsDone(todo): void {
+  private markAsDone(todo): void {
     console.log(todo)
     todo.done = !todo.done
     

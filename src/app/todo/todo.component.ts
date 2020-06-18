@@ -11,7 +11,7 @@ export class TodoComponent implements OnInit {
  
   ngOnInit() {}
 
-  todos = [
+  private todos = [
     {
       id: 1,
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',

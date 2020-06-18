@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import Todo from './todo'
+import { FormBuilder } from '@angular/forms';
+import Todo from './todo';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,60 +9,69 @@ import Todo from './todo'
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
+
 export class TodoListComponent implements OnInit {
-
-  @Input() private todos: Todo[]
-  private description: string  
+  @Input() private todos: Todo[] 
   private selectedTodo: Todo
+  private todoForm: any = this.fb.group({    
+    description: ''
+  })
+  
 
-  ngOnInit() {
-    this.todos = [...this.todos]
-    this.description = ''
-    this.selectedTodo = null
+  constructor(private fb: FormBuilder,) { }  
+
+  ngOnInit(): void {
+    this.todos = [...this.todos];
+    this.todoForm.value.description = '';
+    this.selectedTodo = null;
   }
+
+  get form() { return this.todoForm.controls; }
 
   private ableToEdit (todo) {    
-    this.selectedTodo = todo
-    this.description = todo.description
+    this.selectedTodo = todo;
+    this.todoForm.value.description = todo.description;
   }
 
-  private addTodo(todo): void {
-    if(!this.description) return
+  private addTodo(): void {
     if(this.selectedTodo !== null){
-      this.confirmEdition()
-      return
+      this.confirmEdition();
+      return;
     }
     this.todos.push({
       id: this.calcTodoId(),
-      description: this.description,
+      description: this.todoForm.value.description,
       done: false
-    })
-    this.description = ''
+    });
+    this.todoForm.value.description = '';
   }
 
   private calcTodoId(): number {
-    let id: number = 1
+    let id = 1;
     if (this.todos.length > 0){
-      id = this.todos.slice(-1)[0]['id']
-      id ++
+      id = this.todos.slice(-1)[0]['id'];
+      id ++;
     }
-    return id
+    return id;
   }
 
   private confirmEdition() {
-    this.selectedTodo.description = this.description
-    this.description = ''
-    this.selectedTodo = null
+    this.selectedTodo.description = this.todoForm.value.description;
+    this.todoForm.value.description = '';
+    this.selectedTodo = null;
   }
 
   private deleteTodo(id: number): void {
-    this.todos = this.todos.filter(todo => todo.id !== id)
+    this.todos = this.todos.filter(todo => todo.id !== id);
   }  
 
   private markAsDone(todo): void {
-    console.log(todo)
-    todo.done = !todo.done
-    
+    todo.done = !todo.done;
   }
 
+  onSubmit() {
+    const desc = this.todoForm.value.description;
+    if(!desc) return;
+    this.addTodo();
+  }
 }

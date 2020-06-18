@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { TodoRoutingModule } from './todo-routing.module';
 import { TodoComponent } from './todo.component';
@@ -15,7 +15,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
   imports: [
     CommonModule,
     TodoRoutingModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatListModule,
     MatButtonModule,

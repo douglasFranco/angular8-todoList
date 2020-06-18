@@ -1,9 +1,13 @@
 <div class="container">
-  <mat-form-field class="todo-input-field">
-    <mat-label>What you want to do?</mat-label>
-    <input matInput maxlength="150" [(ngModel)]="description" (keyup.enter)="addTodo()"/>
-  </mat-form-field>
-  
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <div class="todoForm-wrapper">
+      <mat-form-field class="todoForm-input">
+        <mat-label>What you want to do?</mat-label>
+        <input matInput maxlength="150" [ngModel]="todoForm.value.description" formControlName="description"/>             
+      </mat-form-field>
+      <button mat-stroked-button class="todoForm-submitButton" color="primary">Submit</button>
+    </div>    
+  </form>  
   <mat-list class="todolist">
     <mat-list-item class="todolist-item" *ngFor="let todo of todos">
       <div [ngClass]="{'done': todo.done}">{{ todo.description }}</div>

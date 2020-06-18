@@ -1,7 +1,16 @@
-.todo-input-field {
-  width: 100%;
-  margin: 10px 0px;
+.todoForm-wrapper {
+  display: flex;
+  .todoForm-input {
+    width: 100%;
+    margin: 10px 0px;
+  }
+  .todoForm-submitButton {
+    height: max-content;
+    margin: 20px 10px;
+  }
 }
+
+
 
 .todolist {
   display: flex;
